@@ -15,6 +15,8 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()]
     }),
     Components({
+      // 不开启自动生成类型声明文件
+      dts: false,
       resolvers: [ElementPlusResolver()]
     })
   ],

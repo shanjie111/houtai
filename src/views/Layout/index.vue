@@ -24,11 +24,9 @@
   & > .el-container {
     height: 100%;
     & > .el-aside {
+      width: 150px;
       height: 100%;
       background-color: #545c64;
-      & > .el-menu.el-menu--vertical {
-        height: 100%;
-      }
     }
   }
 }

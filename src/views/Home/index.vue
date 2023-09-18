@@ -1,3 +1,14 @@
 <script setup lang="ts"></script>
 
-<template>我是home组件</template>
+<template>
+  <div class="home">123</div>
+</template>
+
+<style lang="less" scoped>
+.home {
+  background-color: #fff;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+</style>

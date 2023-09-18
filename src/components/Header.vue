@@ -37,6 +37,7 @@ header {
   align-items: center;
   width: 100%;
   background-color: #fff;
+  padding: 30px;
 }
 .r-contnet {
   .user {
@@ -53,7 +54,7 @@ header {
     margin-right: 20px;
   }
   h3 {
-    color: #fff;
+    color: #000;
   }
 }
 </style>

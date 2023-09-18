@@ -26,7 +26,20 @@
     & > .el-aside {
       width: 150px;
       height: 100%;
-      background-color: #545c64;
+      background-color: #001529;
+    }
+  }
+}
+
+.common-layout {
+  & > .el-container {
+    & > .el-container {
+      & > .el-main {
+        height: 92.5%;
+        padding: 10px;
+        background: f5f6f8;
+        overflow: hidden;
+      }
     }
   }
 }

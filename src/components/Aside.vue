@@ -47,10 +47,11 @@ const hasChildren = () => {
   <el-aside width="200px">
     <el-menu
       class="el-menu-vertical-demo"
-      background-color="#545c64"
+      background-color="#001529"
       text-color="#fff"
       :collapse="false"
     >
+      <img class="imgs" src="../assets/logo.png" alt="" />
       <!-- 没有子级 -->
       <el-menu-item v-for="item in noChildren()" :key="item.path" :index="item.path">
         <component class="icons" :is="item.icon"></component>
@@ -79,6 +80,10 @@ const hasChildren = () => {
 </template>
 
 <style lang="less" scoped>
+.imgs {
+  width: 150px;
+  height: 60px;
+}
 .icons {
   width: 18px;
   height: 18px;

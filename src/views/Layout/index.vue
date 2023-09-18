@@ -24,7 +24,6 @@
   & > .el-container {
     height: 100%;
     & > .el-aside {
-      width: 150px;
       height: 100%;
       background-color: #001529;
     }

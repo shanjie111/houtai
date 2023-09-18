@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useCounterStore } from '@/stores'
+const userStore = useCounterStore()
 
 const list = ref([
+  {
+    path: '/home',
+    name: 'home',
+    label: '首页',
+    icon: 'House',
+    url: '/home'
+  },
   {
     path: '/user',
     name: 'user',
@@ -10,78 +19,63 @@ const list = ref([
     url: 'UserManage/UserManage'
   },
   {
-    label: '其他',
-    icon: 'location',
-    path: 'other',
-    children: [
-      {
-        path: '/page1',
-        name: 'page1',
-        label: '页面1',
-        icon: 'setting',
-        url: 'Other/PageOne'
-      },
-      {
-        path: '/page2',
-        name: 'page2',
-        label: '页面2',
-        icon: 'setting',
-        url: 'Other/PageTwo'
-      }
-    ]
+    path: '/page1',
+    name: 'page1',
+    label: '页面1',
+    icon: 'setting',
+    url: 'Other/PageOne'
+  },
+  {
+    path: '/page2',
+    name: 'page2',
+    label: '页面2',
+    icon: 'setting',
+    url: 'Other/PageTwo'
   }
 ])
 
-// 没有子级
-const noChildren = () => {
-  return list.value.filter((item) => !item.children)
-}
-
-// 有子级
-const hasChildren = () => {
-  return list.value.filter((item) => item.children)
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const chlickMenu = (item: { path: string; name: string }) => {
+  console.log(item)
+  router.push({
+    name: item.name
+  })
 }
 </script>
 
 <template>
-  <el-aside width="200px">
+  <el-aside :width="userStore.isCollapse ? '160px' : '64px'">
     <el-menu
       class="el-menu-vertical-demo"
       background-color="#001529"
       text-color="#fff"
-      :collapse="false"
+      :collapse="!userStore.isCollapse"
+      :collapse-transition="false"
     >
-      <img class="imgs" src="../assets/logo.png" alt="" />
+      <img :class="userStore.isCollapse ? 'imgs' : 'image'" src="../assets/logo.png" alt="" />
       <!-- 没有子级 -->
-      <el-menu-item v-for="item in noChildren()" :key="item.path" :index="item.path">
+      <el-menu-item
+        v-for="item in list"
+        :key="item.path"
+        :index="item.path"
+        @click="chlickMenu(item)"
+      >
         <component class="icons" :is="item.icon"></component>
         <span>{{ item.label }}</span>
       </el-menu-item>
-
-      <!-- 有子级 -->
-      <el-sub-menu v-for="item in hasChildren()" :key="item.path" :index="item.path">
-        <template #title>
-          <component class="icons" :is="item.icon"></component>
-          <span>{{ item.label }}</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item
-            v-for="(subitem, subindex) in item.children"
-            :key="subindex"
-            :index="subitem.path"
-          >
-            <component class="icons" :is="subitem.icon"></component>
-            <span>{{ subitem.label }}</span>
-          </el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
     </el-menu>
   </el-aside>
 </template>
 
 <style lang="less" scoped>
 .imgs {
-  width: 150px;
+  width: 160px;
+  height: 60px;
+}
+
+.image {
+  width: 64px;
   height: 60px;
 }
 .icons {

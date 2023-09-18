@@ -4,12 +4,18 @@ import { ref } from 'vue'
 const getImgSrc = (user: string) => {
   return new URL(`../assets/${user}.png`, import.meta.url).href
 }
+
+import { useCounterStore } from '@/stores'
+const userStore = useCounterStore()
+const handleCollapse = () => {
+  userStore.updataIsCollapse()
+}
 </script>
 
 <template>
   <el-header>
     <div class="l-contnet">
-      <el-button size="small">
+      <el-button size="small" plain @click="handleCollapse">
         <el-icon><Menu /></el-icon>
       </el-button>
       <h3>首页</h3>

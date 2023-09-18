@@ -1,11 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="home">home组件</div>
+  <div class="page2">page2组件</div>
 </template>
 
 <style lang="less" scoped>
-.home {
+.page2 {
   background-color: #fff;
   padding: 20px;
   width: 100%;

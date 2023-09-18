@@ -1,3 +1,3 @@
 <script setup lang="ts"></script>
 
-<template>home组件</template>
+<template>我是home组件</template>

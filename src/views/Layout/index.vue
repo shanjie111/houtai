@@ -3,9 +3,9 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <Aside></Aside>
       <el-container>
-        <comon-Header></comon-Header>
+        <Header></Header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -14,4 +14,22 @@
   </div>
 </template>
 
-<style scoped></style>
+<style lang="less" scoped>
+.el-container {
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.common-layout {
+  height: 100%;
+  & > .el-container {
+    height: 100%;
+    & > .el-aside {
+      height: 100%;
+      background-color: #545c64;
+      & > .el-menu.el-menu--vertical {
+        height: 100%;
+      }
+    }
+  }
+}
+</style>

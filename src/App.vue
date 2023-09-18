@@ -4,4 +4,8 @@
   <router-view></router-view>
 </template>
 
-<style scoped></style>
+<style lang="less">
+#app {
+  height: 100%;
+}
+</style>

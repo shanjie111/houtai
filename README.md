@@ -1,6 +1,6 @@
 # houtai
 
-This template should help get you started developing with Vue 3 in Vite.
+项目使用vue3+ts+element-plus+vue-router+pinia,添加eslint，css使用less，启动项目使用pnpm
 
 ## Recommended IDE Setup
 

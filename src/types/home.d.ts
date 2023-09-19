@@ -1,4 +1,1 @@
-export type home = {
-  code: number
-  data: [name: string, todayBuy: number, monthBuy: number, totalBuy: number]
-}
+export type home = [name: string, todayBuy: number, monthBuy: number, totalBuy: number]

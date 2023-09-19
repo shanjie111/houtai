@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import axios from 'axios'
 import type { home } from '@/types/home'
+import request from '@/utils/request'
 
 const tabledata = ref()
 
@@ -12,16 +12,10 @@ const tableLabel = ref({
   monthBuy: '本月购买',
   totalBuy: '总购买'
 })
-
-// 渲染数据
 const getTableList = async () => {
-  const res = await axios.get<home>(
-    'https://www.fastmock.site/mock/d46153f89de66ef7b4d0d3df624e2214/api/home/getTableData'
-  )
+  const res = await request<home>('/home/getTableData', 'GET')
   console.log(res)
-  if (res.data.code === 200) {
-    tabledata.value = res.data.data
-  }
+  tabledata.value = res.data
 }
 onMounted(() => {
   getTableList()

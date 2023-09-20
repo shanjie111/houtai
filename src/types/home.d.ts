@@ -1,1 +1,1 @@
-export type home = [name: string, todayBuy: number, monthBuy: number, totalBuy: number]
+export type Home = { name: string; todayBuy: number; monthBuy: number; totalBuy: number }

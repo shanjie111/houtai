@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import type { home } from '@/types/home'
-import request from '@/utils/request'
+import type { Home } from '@/types/home'
+import { getHomeTable } from '@/services/home'
 
-const tabledata = ref()
+const tabledata = ref<Home[]>([])
 
 const tableLabel = ref({
   name: '课程',
@@ -13,8 +13,7 @@ const tableLabel = ref({
   totalBuy: '总购买'
 })
 const getTableList = async () => {
-  const res = await request<home>('/home/getTableData', 'GET')
-  console.log(res)
+  const res = await getHomeTable()
   tabledata.value = res.data
 }
 onMounted(() => {
@@ -60,7 +59,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .home {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   height: 100%;
   .user {

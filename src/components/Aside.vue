@@ -37,7 +37,7 @@ const list = ref([
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const chlickMenu = (item: { path: string; name: string }) => {
-  console.log(item)
+  // console.log(item)
   router.push({
     name: item.name
   })

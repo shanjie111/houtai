@@ -2,7 +2,7 @@
 
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container class="lay-container">
       <Aside></Aside>
       <el-container>
         <Header></Header>
@@ -21,6 +21,9 @@
 }
 .common-layout {
   height: 100%;
+  .lay-container {
+    flex-wrap: nowrap;
+  }
   & > .el-container {
     height: 100%;
     & > .el-aside {

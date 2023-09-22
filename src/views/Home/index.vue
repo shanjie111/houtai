@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import type { Home } from '@/types/home'
-import { getHomeTable } from '@/services/home'
+import { useLoginStore } from '@/stores'
 
 const tabledata = ref<Home[]>([])
 
@@ -12,12 +12,16 @@ const tableLabel = ref({
   monthBuy: '本月购买',
   totalBuy: '总购买'
 })
-const getTableList = async () => {
-  const res = await getHomeTable()
-  tabledata.value = res.data
-}
+// const getTableList = async () => {
+//   const res = await getHomeTable()
+//   tabledata.value = res.data
+// }
+
+const loginStore = useLoginStore()
+const token = loginStore.token
 onMounted(() => {
-  getTableList()
+  // getTableList()
+  console.log(token)
 })
 </script>
 

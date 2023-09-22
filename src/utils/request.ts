@@ -1,10 +1,11 @@
 import axios, { type Method } from 'axios'
 import { ElMessage } from 'element-plus'
+import { useLoginStore } from '@/stores/login'
 
 // 创建axios实例
 const instance = axios.create({
   // 基地址
-  baseURL: import.meta.env.VITE_APP_CALLBACK,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   // 超时时间
   timeout: 10000
 })
@@ -13,6 +14,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (req) => {
     // 统一添加请求头
+    const loginStore = useLoginStore()
+    const token = loginStore.token
+
+    if (token) {
+      // 统一添加请求头
+      req.headers.Authorization = `Bearer ${token}`
+    }
     // return
     return req
   },
@@ -26,7 +34,7 @@ instance.interceptors.response.use(
   //状态码是200的时候
   (res) => {
     // 如果code不是200的时候
-    if (res.data.code !== 200) {
+    if (res.data.code !== 10000) {
       ElMessage.error('获取消息失败')
       return
     }

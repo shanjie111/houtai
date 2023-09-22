@@ -14,6 +14,9 @@ dependencies:
   element-plus:
     specifier: ^2.3.14
     version: registry.npmmirror.com/element-plus@2.3.14(vue@3.3.4)
+  js-cookie:
+    specifier: ^3.0.5
+    version: registry.npmmirror.com/js-cookie@3.0.5
   mockjs:
     specifier: ^1.1.0
     version: registry.npmmirror.com/mockjs@1.1.0
@@ -37,6 +40,9 @@ devDependencies:
   '@tsconfig/node18':
     specifier: ^18.2.2
     version: registry.npmmirror.com/@tsconfig/node18@18.2.2
+  '@types/js-cookie':
+    specifier: ^3.0.4
+    version: registry.npmmirror.com/@types/js-cookie@3.0.4
   '@types/mockjs':
     specifier: ^1.0.7
     version: registry.npmmirror.com/@types/mockjs@1.0.7
@@ -2098,6 +2104,12 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/estree/-/estree-1.0.1.tgz}
     name: '@types/estree'
     version: 1.0.1
+    dev: true
+
+  registry.npmmirror.com/@types/js-cookie@3.0.4:
+    resolution: {integrity: sha512-vMMnFF+H5KYqdd/myCzq6wLDlPpteJK+jGFgBus3Da7lw+YsDmx2C8feGTzY2M3Fo823yON+HC2CL240j4OV+w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/js-cookie/-/js-cookie-3.0.4.tgz}
+    name: '@types/js-cookie'
+    version: 3.0.4
     dev: true
 
   registry.npmmirror.com/@types/json-schema@7.0.13:
@@ -4452,6 +4464,13 @@ packages:
       merge-stream: registry.npmmirror.com/merge-stream@2.0.0
       supports-color: registry.npmmirror.com/supports-color@8.1.1
     dev: true
+
+  registry.npmmirror.com/js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-cookie/-/js-cookie-3.0.5.tgz}
+    name: js-cookie
+    version: 3.0.5
+    engines: {node: '>=14'}
+    dev: false
 
   registry.npmmirror.com/js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz}

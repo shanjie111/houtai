@@ -2,12 +2,15 @@
 import { ref } from 'vue'
 import { ElForm } from 'element-plus'
 import type { LoginForm, LoginRules } from '@/types/login'
+import { loginAsync } from '@/services/login'
+import { useRouter } from 'vue-router'
+import { useLoginStore } from '@/stores'
 
 // 表单绑定的数据
 const form = ref<LoginForm>({
-  mobile: '',
-  password: '',
-  isAgree: false
+  mobile: import.meta.env.VITE_APP_ENV === 'development' ? '13800000002' : '',
+  password: import.meta.env.VITE_APP_ENV === 'development' ? 'hm#qd@23!' : '',
+  isAgree: import.meta.env.VITE_APP_ENV === 'development' ? true : false
 })
 
 // 表单校验规则
@@ -37,12 +40,18 @@ const rules = ref<LoginRules>({
 // 获取到模板的ref
 const formRef = ref<any>(null)
 
+const router = useRouter()
+const loginStore = useLoginStore()
 // 点击登陆按钮
 const login = () => {
-  formRef.value!.validate((isOk: boolean) => {
+  formRef.value!.validate(async (isOk: boolean) => {
     if (isOk) {
       // 校验成功
-      console.log(13)
+      const res = await loginAsync(form.value)
+      console.log(res.data)
+
+      loginStore.setToken(res.data)
+      router.push('/')
     }
   })
 }
@@ -63,7 +72,7 @@ const login = () => {
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" style="margin-top: 20px">
-            <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+            <el-input v-model="form.password" placeholder="请输入密码" type="password"></el-input>
           </el-form-item>
           <!-- 复选框 -->
           <el-form-item prop="isAgree" style="margin-top: 20px">

@@ -31,5 +31,13 @@ export default defineConfig({
         javascriptEnabled: true
       }
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://heimahr.itheima.net',
+        changeOrigin: true // 是否允许跨域代理
+      }
+    }
   }
 })

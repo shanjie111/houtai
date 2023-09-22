@@ -1,7 +1,7 @@
 export interface LoginForm {
   mobile: string
   password: string
-  isAgree: boolean
+  isAgree?: boolean
 }
 
 export interface LoginRules {
@@ -22,4 +22,11 @@ export interface LoginRules {
     validator: (rule: any, value: any, callback: (error?: Error) => void) => void
     trigger: string
   }[]
+}
+
+export type LoginOk = {
+  code?: number
+  message?: string
+  data: string
+  success?: boolean
 }

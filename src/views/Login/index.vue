@@ -50,6 +50,10 @@ const login = () => {
       const res = await loginAsync(form.value)
       console.log(res.data)
       if (res.success === true) {
+        ElMessage({
+          message: res.message,
+          type: 'success'
+        })
         loginStore.setToken(res.data)
         router.push('/')
       } else {

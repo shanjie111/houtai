@@ -43,17 +43,6 @@ onMounted(() => {
             <p>上次登陆地点： <span>北京</span></p>
           </div>
         </el-card>
-        <!-- 左下角 -->
-        <el-card shadow="hover" style="margin-top: 20px; height: 320px; background-color: #f5f6f8">
-          <el-table :data="tabledata">
-            <el-table-column
-              v-for="(item, index) in tableLabel"
-              :key="index"
-              :prop="index"
-              :label="item"
-            ></el-table-column>
-          </el-table>
-        </el-card>
       </el-col>
       <el-col :span="16" style="margin-top: 20px"></el-col>
     </el-row>

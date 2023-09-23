@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ElForm } from 'element-plus'
 import type { LoginForm, LoginRules } from '@/types/login'
 import { loginAsync } from '@/services/login'
 import { useRouter } from 'vue-router'
 import { useLoginStore } from '@/stores'
+import { ElMessage } from 'element-plus'
 
 // 表单绑定的数据
 const form = ref<LoginForm>({
@@ -49,9 +49,15 @@ const login = () => {
       // 校验成功
       const res = await loginAsync(form.value)
       console.log(res.data)
-
-      loginStore.setToken(res.data)
-      router.push('/')
+      if (res.success === true) {
+        loginStore.setToken(res.data)
+        router.push('/')
+      } else {
+        ElMessage({
+          message: res.message,
+          type: 'error'
+        })
+      }
     }
   })
 }

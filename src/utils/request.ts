@@ -50,6 +50,7 @@ type Data<T> = {
   code: number
   data: T
   message: string
+  success: boolean
 }
 
 // 封装请求工具

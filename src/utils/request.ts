@@ -1,6 +1,8 @@
 import axios, { type Method } from 'axios'
 import { ElMessage } from 'element-plus'
-import { useLoginStore } from '@/stores/login'
+import { useLoginStore, useUserStore } from '@/stores'
+// import { useRouter } from 'vue-router'
+import router from '../router'
 
 // 创建axios实例
 const instance = axios.create({
@@ -34,14 +36,33 @@ instance.interceptors.response.use(
   //状态码是200的时候
   (res) => {
     // 如果code不是200的时候
-    if (res.data.code !== 10000) {
-      ElMessage.error('获取消息失败')
-      return
+    if (res.data.success) {
+      return res.data
+    } else {
+      ElMessage.error(res.data.message)
+      return Promise.reject(new Error(res.data.message))
     }
-    return res.data
   },
+  // 状态码不是200
   (err) => {
-    ElMessage.error('获取消息失败')
+    // 获取pinia仓库
+    const loginStore = useLoginStore()
+    const userStore = useUserStore()
+    // 如果状态码是401
+    if (err.response.status === 401) {
+      // const router = useRouter()
+      // console.log(router, 'router')
+      // router是undefined
+      // 提示用户
+      // 清空用户数据
+      loginStore.delUser()
+      userStore.delList()
+      // 退出登陆
+      router.push('/login')
+      ElMessage.error('登陆超时，请重新登陆')
+    } else {
+      ElMessage.error('获取消息失败')
+    }
     return Promise.reject(new Error(err))
   }
 )

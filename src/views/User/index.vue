@@ -1,20 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserTableList } from '@/services/home'
 import { onMounted } from 'vue'
 import type { User } from '@/types/user'
 
 const tableDatas = ref<User[]>([])
-
-const list = async () => {
-  const res = await getUserTableList()
-  tableDatas.value = res.data
-  // console.log(res.data)
-}
-
-onMounted(() => {
-  list()
-})
 </script>
 
 <template>
@@ -67,7 +56,7 @@ onMounted(() => {
   padding: 20px 0;
   width: 100%;
   height: 100%;
-  /deep/ .el-table {
+  :deep(.el-table) {
     width: 100%;
   }
 }

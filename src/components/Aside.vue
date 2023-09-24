@@ -3,43 +3,23 @@ import { ref } from 'vue'
 import { useCounterStore } from '@/stores'
 const userStore = useCounterStore()
 
-const list = ref([
-  {
-    path: '/home',
-    name: 'home',
-    label: '首页',
-    icon: 'House',
-    url: '/home'
-  },
-  {
-    path: '/user',
-    name: 'user',
-    label: '用户管理',
-    icon: 'user',
-    url: 'UserManage/UserManage'
-  },
-  {
-    path: '/page1',
-    name: 'page1',
-    label: '页面1',
-    icon: 'setting',
-    url: 'Other/PageOne'
-  },
-  {
-    path: '/page2',
-    name: 'page2',
-    label: '页面2',
-    icon: 'setting',
-    url: 'Other/PageTwo'
-  }
-])
+// 获取到左侧菜单的数据
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const itemList = ref({} as any)
+itemList.value = route.matched[0].children
 
+// 渲染左侧菜单
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const chlickMenu = (item: { path: string; name: string }) => {
+const chlickMenu = (item: {
+  path: string
+  name: string
+  mete: { icon: string; username: string }
+}) => {
   // console.log(item)
   router.push({
-    name: item.name
+    path: item.path
   })
 }
 </script>
@@ -56,13 +36,13 @@ const chlickMenu = (item: { path: string; name: string }) => {
       <img :class="userStore.isCollapse ? 'imgs' : 'image'" src="../assets/logo.png" alt="" />
       <!-- 没有子级 -->
       <el-menu-item
-        v-for="item in list"
-        :key="item.path"
+        v-for="item in itemList"
+        :key="item.name"
         :index="item.path"
         @click="chlickMenu(item)"
       >
-        <component class="icons" :is="item.icon"></component>
-        <span>{{ item.label }}</span>
+        <component class="icons" :is="item.meta.icon"></component>
+        <span>{{ item.meta.username }}</span>
       </el-menu-item>
     </el-menu>
   </el-aside>

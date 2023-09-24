@@ -15,7 +15,8 @@ export const useLoginStore = defineStore(
 
     // 删除token
     const delUser = () => {
-      token.value = undefined
+      localStorage.removeItem('login')
+      token.value = null || undefined
     }
 
     return { token, setToken, delUser }

@@ -17,7 +17,6 @@ const route = useRoute()
 
 // 用户数据
 import type { UserData } from '@/types/home'
-import { onMounted } from 'vue'
 import { nextTick } from 'vue'
 const userStore = useUserStore()
 const data = ref({} as UserData)
@@ -58,6 +57,62 @@ const timer = setTimeout(() => {
 onUnmounted(() => {
   clearTimeout(timer)
 })
+
+// 更改密码
+import type { LoginFormPaaa, LoginRulesPass } from '@/types/home'
+const dialogVisible = ref(false)
+const isForm = () => {
+  dialogVisible.value = true
+}
+// 数据
+const formModel = ref<LoginFormPaaa>({
+  oldPassword: '',
+  newPassword: '',
+  rePassword: ''
+})
+
+// 校验信息
+const formRules = ref<LoginRulesPass>({
+  oldPassword: [
+    { required: true, message: '旧密码不能为空', trigger: 'blur' },
+    { min: 6, max: 16, message: '最少6位为多16位', trigger: 'blur' }
+  ],
+  newPassword: [
+    { required: true, message: '新密码不能为空', trigger: 'blur' },
+    { min: 6, max: 16, message: '最少6位为多16位', trigger: 'blur' }
+  ],
+  rePassword: [
+    { required: true, message: '重新输入新密码', trigger: 'blur' },
+    { min: 6, max: 16, message: '最少6位为多16位', trigger: 'blur' },
+    {
+      validator: (rule, value, callback) => {
+        if (value === formModel.value.newPassword) {
+          callback()
+        } else {
+          callback(new Error('新密码和重复密码不一致'))
+        }
+      },
+      trigger: 'blur'
+    }
+  ]
+})
+
+// 修改成功
+const formRef = ref()
+import { passUserAsync } from '@/services/home'
+const formPass = () => {
+  formRef.value.validate(async (isOk: boolean) => {
+    if (isOk) {
+      const res = await passUserAsync(formModel.value)
+      console.log(res)
+    }
+  })
+}
+// 点击取消清空数据
+const btnClose = () => {
+  formRef.value.resetFields()
+  dialogVisible.value = false
+}
 </script>
 
 <template>
@@ -83,8 +138,12 @@ onUnmounted(() => {
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>首页</el-dropdown-item>
-            <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item>项目地址</el-dropdown-item>
+            <a href="#" @click="isForm">
+              <el-dropdown-item>修改密码</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://heimahr.itheima.net/">
+              <el-dropdown-item>项目地址</el-dropdown-item>
+            </a>
             <el-dropdown-item>
               <el-popconfirm
                 title="确认要退出登录吗?"
@@ -103,6 +162,25 @@ onUnmounted(() => {
       </el-dropdown>
     </div>
   </el-header>
+
+  <!-- 修改密码 -->
+  <el-dialog v-model="dialogVisible" @close="btnClose" title="修改密码" :width="500" draggable>
+    <el-form ref="formRef" label-width="100px" :model="formModel" :rules="formRules">
+      <el-form-item label="旧密码" prop="oldPassword">
+        <el-input size="large" v-model="formModel.oldPassword" password></el-input>
+      </el-form-item>
+      <el-form-item label="新密码" prop="newPassword">
+        <el-input size="large" v-model="formModel.newPassword" password></el-input>
+      </el-form-item>
+      <el-form-item label="重复密码" prop="rePassword">
+        <el-input size="large" v-model="formModel.rePassword" password></el-input>
+      </el-form-item>
+      <el-form-item style="margin-top: 30px; margin-bottom: -10px">
+        <el-button @click="formPass" type="primary" style="margin-right: 20px">确认</el-button>
+        <el-button @click="btnClose">取消</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 </template>
 
 <style lang="less" scoped>

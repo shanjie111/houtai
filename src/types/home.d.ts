@@ -53,3 +53,41 @@ export interface Roles {
   points: string[]
   [property: string]: any
 }
+
+export interface LoginFormPaaa {
+  oldPassword: string
+  newPassword: string
+  rePassword: string
+}
+// 修改密码
+export interface LoginRulesPass {
+  oldPassword: {
+    required?: boolean
+    message: string
+    trigger: string
+    min?: number
+    max?: number
+  }[]
+  newPassword: {
+    required?: boolean
+    message: string
+    trigger: string
+    min?: number
+    max?: number
+  }[]
+  rePassword: {
+    required?: boolean
+    message?: string
+    trigger?: string
+    min?: number
+    max?: number
+    validator?: (rule: any, value: any, callback: (error?: Error) => void) => void
+  }[]
+}
+
+export type LoginOk = {
+  code?: number
+  message?: string
+  data: string
+  success?: boolean
+}

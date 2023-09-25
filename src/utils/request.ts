@@ -35,16 +35,26 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   //状态码是200的时候
   (res) => {
+    console.log(res)
+
     // 如果code不是200的时候
     if (res.data.success) {
       return res.data
     } else {
+      const loginStore = useLoginStore()
+      const userStore = useUserStore()
+      // 清空用户数据
+      loginStore.delUser()
+      userStore.delList()
+      // 退出登陆
+      router.push('/login')
       ElMessage.error(res.data.message)
       return Promise.reject(new Error(res.data.message))
     }
   },
   // 状态码不是200
   (err) => {
+    console.log(err)
     // 获取pinia仓库
     const loginStore = useLoginStore()
     const userStore = useUserStore()

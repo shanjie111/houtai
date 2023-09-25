@@ -18,10 +18,15 @@ const route = useRoute()
 // 用户数据
 import type { UserData } from '@/types/home'
 import { onMounted } from 'vue'
+import { nextTick } from 'vue'
 const userStore = useUserStore()
 const data = ref({} as UserData)
-onMounted(async () => {
+onBeforeMount(async () => {
   await userStore.fetchUserAsync()
+  data.value = await userStore.list
+})
+
+nextTick(() => {
   data.value = userStore.list
 })
 
@@ -34,6 +39,25 @@ const delItem = () => {
   userStore.delList()
   router.push('/login')
 }
+
+// 背景颜色
+import { onUnmounted } from 'vue'
+import { onBeforeMount } from 'vue'
+const color = ref({
+  background: '#fff'
+})
+
+const timer = setTimeout(() => {
+  if (data.value.staffPhoto) {
+    color.value.background = '#fff'
+  } else {
+    color.value.background = '#04c9be'
+  }
+}, 800)
+
+onUnmounted(() => {
+  clearTimeout(timer)
+})
 </script>
 
 <template>
@@ -109,9 +133,9 @@ header {
       border-radius: 50%;
       text-align: center;
       line-height: 40px;
-      background: #04c9be;
+      background: v-bind('color.background');
       color: #fff;
-      margin-right: 40px;
+      margin-right: 20px;
     }
   }
 }

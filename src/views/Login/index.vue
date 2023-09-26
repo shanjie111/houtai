@@ -48,7 +48,6 @@ const login = () => {
     if (isOk) {
       // 校验成功
       const res = await loginAsync(form.value)
-      console.log(res.data)
       if (res.success === true) {
         ElMessage({
           message: res.message,

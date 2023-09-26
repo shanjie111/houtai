@@ -32,16 +32,20 @@ const chlickMenu = (item: {
       text-color="#fff"
       :collapse="!userStore.isCollapse"
       :collapse-transition="false"
+      :default-active="1"
     >
       <img :class="userStore.isCollapse ? 'imgs' : 'image'" src="../assets/logo.png" alt="" />
-      <!-- 没有子级 -->
       <el-menu-item
-        v-for="item in itemList"
+        v-for="(item, index) in itemList"
         :key="item.name"
-        :index="item.path"
+        :index="index + 1"
         @click="chlickMenu(item)"
       >
-        <component class="icons" :is="item.meta.icon"></component>
+        <component
+          class="icons"
+          :is="item.meta.icon"
+          style="margin-right: 20px; margin-left: 10px"
+        ></component>
         <span>{{ item.meta.username }}</span>
       </el-menu-item>
     </el-menu>

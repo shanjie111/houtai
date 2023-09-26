@@ -35,8 +35,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   //状态码是200的时候
   (res) => {
-    console.log(res)
-
     // 如果code不是200的时候
     if (res.data.success) {
       return res.data
@@ -54,7 +52,6 @@ instance.interceptors.response.use(
   },
   // 状态码不是200
   (err) => {
-    console.log(err)
     // 获取pinia仓库
     const loginStore = useLoginStore()
     const userStore = useUserStore()

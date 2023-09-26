@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="page1">page1组件</div>
+  <div class="page1">权限</div>
 </template>
 
 <style lang="less" scoped>

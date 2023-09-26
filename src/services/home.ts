@@ -1,5 +1,6 @@
 import type { UserData } from '@/types/home'
 import request from '../utils/request'
+// 首页
 
 // 获取用户信息
 export const someuserAsync = () => {

@@ -22,40 +22,40 @@ const router = createRouter({
           component: () => import('../views/Home/index.vue')
         },
         {
-          path: '/user',
-          name: 'user',
+          path: '/depaetment',
+          name: 'depaetment',
           meta: {
-            username: '角色',
+            username: '组织',
             icon: 'user'
           },
-          component: () => import('../views/User/index.vue')
+          component: () => import('../views/department/index.vue')
         },
         {
-          path: '/page1',
-          name: 'page1',
+          path: '/role',
+          name: 'role',
           meta: {
-            username: 'page1',
+            username: '角色',
             icon: 'setting'
           },
-          component: () => import('../views/Page1/index.vue')
+          component: () => import('../views/role/index.vue')
         },
         {
-          path: '/page2',
-          name: 'page2',
+          path: '/employee',
+          name: 'employee',
           meta: {
-            username: 'page2',
+            username: '员工',
             icon: 'setting'
           },
-          component: () => import('../views/Page2/index.vue')
+          component: () => import('../views/employee/index.vue')
         },
         {
-          path: '/page3',
-          name: 'page3',
+          path: '/permission',
+          name: 'permission',
           meta: {
-            username: 'page3',
+            username: '权限',
             icon: 'setting'
           },
-          component: () => import('../views/Page2/index.vue')
+          component: () => import('../views/permission/index.vue')
         }
       ]
     },
